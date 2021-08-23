@@ -77,6 +77,7 @@ const GiftCardUpdateFormProvider: React.FC<GiftCardUpdateFormProviderProps> = ({
 
     return {
       tag,
+      expiryEnabled: !!expiryDate,
       expiryDate,
       expiryType,
       expiryPeriodType: expiryPeriod?.type || TimePeriodTypeEnum.YEAR,

@@ -21,7 +21,14 @@ const GiftCardUpdateDetailsCard: React.FC = () => {
 
   const {
     change,
-    data: { expiryType, expiryPeriodAmount, expiryPeriodType, tag, expiryDate },
+    data: {
+      expiryEnabled,
+      expiryType,
+      expiryPeriodAmount,
+      expiryPeriodType,
+      tag,
+      expiryDate
+    },
     formErrors
   } = useGiftCardUpdateForm();
 
@@ -59,6 +66,7 @@ const GiftCardUpdateDetailsCard: React.FC = () => {
                 expiryDate={expiryDate}
                 errors={formErrors}
                 change={change}
+                expiryEnabled={expiryEnabled}
                 expiryType={expiryType}
                 expiryPeriodAmount={expiryPeriodAmount}
                 expiryPeriodType={expiryPeriodType}

@@ -3532,14 +3532,6 @@
     "context": "GiftCardUpdateInfoCard used by label",
     "string": "Used by"
   },
-  "src_dot_giftCards_dot_GiftCardUpdate_dot_GiftCardUpdatePageHeader_dot_disableLabel": {
-    "context": "GiftCardEnableDisableSection enable label",
-    "string": "Disable"
-  },
-  "src_dot_giftCards_dot_GiftCardUpdate_dot_GiftCardUpdatePageHeader_dot_enableLabel": {
-    "context": "GiftCardEnableDisableSection enable label",
-    "string": "Enable"
-  },
   "src_dot_giftCards_dot_GiftCardUpdate_dot_GiftCardUpdatePageHeader_dot_resendButtonLabel": {
     "context": "giftCardUpdatePageHeader resendButtonLabel",
     "string": "Resend code"
@@ -3652,21 +3644,21 @@
     "context": "GiftCardDeleteDialog with balance description",
     "string": "{selectedItemsCount,plural,one{The gift card you are about to delete has available balance. By deleting this card you may remove balance available to your customer.} other{You are about to delete gift cards with available balance. Are you sure you want to do that?}}"
   },
-  "src_dot_giftCards_dot_components_dot_GiftCardExpirySelect_dot_expirationDateLabel": {
-    "context": "GiftCarUpdateDetailsExpirySection expiration date label",
-    "string": "Expiration date"
-  },
   "src_dot_giftCards_dot_components_dot_GiftCardExpirySelect_dot_expiryDateLabel": {
     "context": "GiftCarUpdateDetailsExpirySection expiry date label",
-    "string": "Expiration date"
+    "string": "Exact date"
+  },
+  "src_dot_giftCards_dot_components_dot_GiftCardExpirySelect_dot_expiryEnabledLabel": {
+    "context": "GiftCarUpdateDetailsExpirySection expiration enabled label",
+    "string": "Set gift card expiry date"
+  },
+  "src_dot_giftCards_dot_components_dot_GiftCardExpirySelect_dot_expiryOnLabel": {
+    "context": "GiftCarUpdateDetailsExpirySection expiry on label",
+    "string": "Will expire on:"
   },
   "src_dot_giftCards_dot_components_dot_GiftCardExpirySelect_dot_expiryPeriodLabel": {
     "context": "GiftCarUpdateDetailsExpirySection expiry period label",
-    "string": "Expiry period"
-  },
-  "src_dot_giftCards_dot_components_dot_GiftCardExpirySelect_dot_neverExpireLabel": {
-    "context": "GiftCarUpdateDetailsExpirySection never expire label",
-    "string": "Never expire"
+    "string": "Expires in"
   },
   "src_dot_giftCards_dot_components_dot_GiftCardTagInput_dot_label": {
     "context": "GiftCardTagInput tag label",
@@ -3678,15 +3670,15 @@
   },
   "src_dot_giftCards_dot_components_dot_TimePeriodField_dot_dayLabel": {
     "context": "TimePeriodTextWithSelectField day label",
-    "string": "days after usage"
+    "string": "days after issue"
   },
   "src_dot_giftCards_dot_components_dot_TimePeriodField_dot_monthLabel": {
     "context": "TimePeriodTextWithSelectField month label",
-    "string": "months after usage"
+    "string": "months after issue"
   },
   "src_dot_giftCards_dot_components_dot_TimePeriodField_dot_yearLabel": {
     "context": "TimePeriodTextWithSelectField year label",
-    "string": "years after usage"
+    "string": "years after issue"
   },
   "src_dot_home": {
     "context": "home section name",

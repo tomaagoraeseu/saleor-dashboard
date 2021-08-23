@@ -1,7 +1,10 @@
 import { TextField, Typography } from "@material-ui/core";
+import HorizontalSpacer from "@saleor/apps/components/HorizontalSpacer";
 import VerticalSpacer from "@saleor/apps/components/VerticalSpacer";
+import ControlledCheckbox from "@saleor/components/ControlledCheckbox";
 import RadioGroupField from "@saleor/components/RadioGroupField";
 import { GiftCardError } from "@saleor/fragments/types/GiftCardError";
+import { getExpiryPeriodTerminationDate } from "@saleor/giftCards/GiftCardCreateDialog/utils";
 import { getGiftCardErrorMessage } from "@saleor/giftCards/GiftCardUpdate/messages";
 import { FormChange } from "@saleor/hooks/useForm";
 import {
@@ -9,6 +12,7 @@ import {
   TimePeriodTypeEnum
 } from "@saleor/types/globalTypes";
 import React from "react";
+import { FormattedMessage } from "react-intl";
 import { MessageDescriptor, useIntl } from "react-intl";
 
 import TimePeriodField from "../TimePeriodField/TimePeriodField";
@@ -22,21 +26,18 @@ interface UntranslatedOption {
 
 const options: UntranslatedOption[] = [
   {
-    label: messages.neverExpireLabel,
-    value: GiftCardExpiryTypeEnum.NEVER_EXPIRE
-  },
-  {
     label: messages.expiryPeriodLabel,
     value: GiftCardExpiryTypeEnum.EXPIRY_PERIOD
   },
   {
-    label: messages.expirationDateLabel,
+    label: messages.expiryDateLabel,
     value: GiftCardExpiryTypeEnum.EXPIRY_DATE
   }
 ];
 
 interface GiftCardExpirySelectProps {
   change: FormChange;
+  expiryEnabled: boolean;
   expiryPeriodType: TimePeriodTypeEnum;
   expiryPeriodAmount: number;
   expiryType: GiftCardExpiryTypeEnum;
@@ -48,6 +49,7 @@ interface GiftCardExpirySelectProps {
 const GiftCardExpirySelect: React.FC<GiftCardExpirySelectProps> = ({
   errors,
   change,
+  expiryEnabled,
   expiryPeriodType,
   expiryPeriodAmount,
   expiryType = GiftCardExpiryTypeEnum.EXPIRY_PERIOD,
@@ -66,45 +68,66 @@ const GiftCardExpirySelect: React.FC<GiftCardExpirySelectProps> = ({
 
   return (
     <>
-      <Typography>
-        {intl.formatMessage(messages.expirationDateLabel)}
-      </Typography>
-      <VerticalSpacer />
-      <RadioGroupField
-        innerContainerClassName={classes.radioGroupContainer}
-        choices={translatedOptions}
+      <ControlledCheckbox
+        name={"expiryEnabled"}
+        checked={expiryEnabled}
         onChange={change}
-        name={"expiryType"}
-        value={expiryType}
+        label={intl.formatMessage(messages.expiryEnabledLabel)}
       />
-      <VerticalSpacer spacing={2} />
+      {expiryEnabled && (
+        <>
+          <VerticalSpacer spacing={2} />
+          <RadioGroupField
+            innerContainerClassName={classes.radioGroupContainer}
+            choices={translatedOptions}
+            onChange={change}
+            name={"expiryType"}
+            value={expiryType}
+          />
+          <VerticalSpacer spacing={2} />
 
-      {expiryType === GiftCardExpiryTypeEnum.EXPIRY_DATE && (
-        <TextField
-          error={!!errors?.expiryDate}
-          helperText={getGiftCardErrorMessage(errors?.expiryDate, intl)}
-          onChange={change}
-          name={"expiryDate"}
-          className={classes.dateField}
-          label={intl.formatMessage(messages.expiryDateLabel)}
-          value={expiryDate}
-          InputLabelProps={{
-            shrink: true
-          }}
-          type="date"
-        />
-      )}
+          {expiryType === GiftCardExpiryTypeEnum.EXPIRY_DATE && (
+            <TextField
+              error={!!errors?.expiryDate}
+              helperText={getGiftCardErrorMessage(errors?.expiryDate, intl)}
+              onChange={change}
+              name={"expiryDate"}
+              className={classes.dateField}
+              label={intl.formatMessage(messages.expiryDateLabel)}
+              value={expiryDate}
+              InputLabelProps={{
+                shrink: true
+              }}
+              type="date"
+            />
+          )}
 
-      {expiryType === GiftCardExpiryTypeEnum.EXPIRY_PERIOD && (
-        <TimePeriodField
-          isError={!!errors?.expiryPeriod}
-          helperText={getGiftCardErrorMessage(errors?.expiryPeriod, intl)}
-          change={change}
-          periodType={expiryPeriodType}
-          periodAmount={expiryPeriodAmount}
-          amountFieldName={"expiryPeriodAmount"}
-          typeFieldName={"expiryPeriodType"}
-        />
+          {expiryType === GiftCardExpiryTypeEnum.EXPIRY_PERIOD && (
+            <div className={classes.periodField}>
+              <TimePeriodField
+                isError={!!errors?.expiryPeriod}
+                helperText={getGiftCardErrorMessage(errors?.expiryPeriod, intl)}
+                change={change}
+                periodType={expiryPeriodType}
+                periodAmount={expiryPeriodAmount}
+                amountFieldName={"expiryPeriodAmount"}
+                typeFieldName={"expiryPeriodType"}
+              />
+              <HorizontalSpacer spacing={2} />
+              <div className={classes.dateText}>
+                <Typography variant="caption">
+                  <FormattedMessage {...messages.expiryOnLabel} />
+                </Typography>
+                <Typography>
+                  {getExpiryPeriodTerminationDate(
+                    expiryPeriodType,
+                    expiryPeriodAmount
+                  )}
+                </Typography>
+              </div>
+            </div>
+          )}
+        </>
       )}
     </>
   );

@@ -14,6 +14,7 @@ export interface GiftCardCommonFormData {
   tag: string;
   balanceAmount: number;
   balanceCurrency: string;
+  expiryEnabled: boolean;
   expiryDate: string;
   expiryType: GiftCardExpiryTypeEnum;
   expiryPeriodType: TimePeriodTypeEnum;
